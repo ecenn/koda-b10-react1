@@ -1,4 +1,27 @@
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
+const schema = yup.object({
+  nama: yup.string().required(),
+  umur: yup.number().required(),
+  gender: yup.string().required(),
+  smoke: yup.string().required(),
+})
+
 function App() {
+  const {handleSubmit, register, formState: {errors}} = useForm({defaultValues:{
+    nama: "",
+    umur: "",
+    gender: "",
+    smoke: "",
+    cigs: "",
+  },
+  resolver: yupResolver(schema)
+})
+
+const onSubmit = (data) => console.log(data)
+
   return (
     <>
       <div className="font-sans bg-gray-100 w-full flex flex-col gap-2">
@@ -15,53 +38,55 @@ function App() {
             </div>
         </div>
         <div className="w-full flex justify-center items-center">
-          <form action="submit" className="w-5/12 flex flex-col gap-2">
+          <form onSubmit={handleSubmit(onSubmit)} action="submit" className="w-5/12 flex flex-col gap-2">
             <div className="flex flex-col justify-center gap-2 bg-white border border-gray-300 rounded-2xl p-10">
               <label htmlFor="nama">Siapa nama anda? <span className="text-red-600">*</span></label>
-              <input type="text" name="nama" id="nama" placeholder="Your answer" class="border-b border-gray-400 w-1/2 text-sm" />
+              <input {...register("nama")} type="text" name="nama" id="nama" placeholder="Your answer" className="border-b border-gray-400 w-1/2 text-sm" />
+              {errors.nama && <p role="alert">{errors.nama.message}</p>}
             </div>
             <div className="flex flex-col justify-center gap-2 bg-white border border-gray-300 rounded-2xl p-10">
               <label htmlFor="umur">Berapa umur anda? <span className="text-red-600">*</span></label>
-              <div>
-                <input type="number" name="umur" id="umur" placeholder="Your answer" class="border-b border-gray-400 w-1/2 text-sm" />
-              </div>
+              <input {...register("umur")} type="number" name="umur" id="umur" placeholder="Your answer" className="border-b border-gray-400 w-1/2 text-sm" />
+              {errors.umur && <p role="alert">{errors.umur.message}</p>}
             </div>
             <div className="flex flex-col justify-center gap-2 bg-white border border-gray-300 rounded-2xl p-10">
               <label htmlFor="m">Apa jenis kelamin anda? <span className="text-red-600">*</span></label>
               <div className="flex gap-2">
-                <input type="radio" name="gender" id="m" value="m" />
+                <input {...register("gender")} type="radio" name="gender" id="m" value="m" />
                 <label htmlFor="m">Laki-laki</label>
               </div>
               <div className="flex gap-2">
-                <input type="radio" name="gender" id="f" value="f" />
+                <input {...register("gender")} type="radio" name="gender" id="f" value="f" />
                 <label htmlFor="f">Perempuan</label>
               </div>
+              {errors.gender && <p role="alert">{errors.gender.message}</p>}
             </div>
             <div className="flex flex-col justify-center gap-2 bg-white border border-gray-300 rounded-2xl p-10">
               <label htmlFor="y">Apakah anda perokok? <span className="text-red-600">*</span></label>
               <div className="flex gap-2">
-                <input type="radio" name="smoke" id="y" value="y" />
+                <input {...register("smoke")} type="radio" name="smoke" id="y" value="y" />
                 <label htmlFor="y">Ya</label>
               </div>
               <div className="flex gap-2">
-                <input type="radio" name="smoke" id="n" value="n" />
+                <input {...register("smoke")} type="radio" name="smoke" id="n" value="n" />
                 <label htmlFor="n">Tidak</label>
               </div>
+              {errors.smoke && <p role="alert">{errors.smoke.message}</p>}
             </div>
             <div className="flex flex-col justify-center gap-2 bg-white border border-gray-300 rounded-2xl p-10">
               <label htmlFor="gg">Jika anda perokok, rokok apa yang pernah anda coba?</label>
               <div className="flex flex-col items-start">
                 <div className="flex gap-2">
-                  <input type="checkbox" name="cigs" id="gg" value="gg" /><label htmlFor="gg">Gudang Garam Filter</label>
+                  <input {...register("cigs")} type="checkbox" name="cigs" id="gg" value="gg" /><label htmlFor="gg">Gudang Garam Filter</label>
                 </div>
                 <div className="flex gap-2">
-                  <input type="checkbox" name="cigs" id="ls" value="ls" /><label htmlFor="ls">Lucky Strike</label>
+                  <input {...register("cigs")} type="checkbox" name="cigs" id="ls" value="ls" /><label htmlFor="ls">Lucky Strike</label>
                 </div>
                 <div className="flex gap-2">
-                  <input type="checkbox" name="cigs"  id="mb" value="mb" /><label htmlFor="mb">Marlboro</label>
+                  <input {...register("cigs")} type="checkbox" name="cigs"  id="mb" value="mb" /><label htmlFor="mb">Marlboro</label>
                 </div>
                 <div className="flex gap-2">
-                  <input type="checkbox" name="cigs" id="es" value="es" /><label htmlFor="es">Esse</label>
+                  <input {...register("cigs")} type="checkbox" name="cigs" id="es" value="es" /><label htmlFor="es">Esse</label>
                 </div>
               </div>
             </div>

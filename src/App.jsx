@@ -23,9 +23,9 @@ function App() {
   })
 
   const submitted = (data) => {
-    const temp = JSON.stringify(data)
-    storage.push(temp)
-    window.localStorage.setItem("respondent", storage)
+    storage.push(data)
+    const container = JSON.stringify(storage)
+    window.localStorage.setItem("respondent", container)
   }
   
   return (

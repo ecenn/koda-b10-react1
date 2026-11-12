@@ -9,6 +9,8 @@ const schema = yup.object({
   smoke: yup.string().required(),
 })
 
+let storage = []
+
 function App() {
   const {handleSubmit, register, formState: {errors}} = useForm({defaultValues:{
     nama: "",
@@ -18,10 +20,14 @@ function App() {
     cigs: "",
   },
   resolver: yupResolver(schema)
-})
+  })
 
-const onSubmit = (data) => console.log(data)
-
+  const submitted = (data) => {
+    const temp = JSON.stringify(data)
+    storage.push(temp)
+    window.localStorage.setItem("respondent", storage)
+  }
+  
   return (
     <>
       <div className="font-sans bg-gray-100 w-full flex flex-col gap-2">
@@ -38,7 +44,10 @@ const onSubmit = (data) => console.log(data)
             </div>
         </div>
         <div className="w-full flex justify-center items-center">
-          <form onSubmit={handleSubmit(onSubmit)} action="submit" className="w-5/12 flex flex-col gap-2">
+        
+        
+          <form onSubmit={handleSubmit(submitted)} action="submit" className="w-5/12 flex flex-col gap-2">
+        
             <div className="flex flex-col justify-center gap-2 bg-white border border-gray-300 rounded-2xl p-10">
               <label htmlFor="nama">Siapa nama anda? <span className="text-red-600">*</span></label>
               <input {...register("nama")} type="text" name="nama" id="nama" placeholder="Your answer" className="border-b border-gray-400 w-1/2 text-sm" />

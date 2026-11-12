@@ -1,38 +1,78 @@
 function App() {
   return (
-    <div>
-      <form action="submit">
-        <div>
-          <label htmlFor="nama">Siapa nama anda?</label><br />
-          <input type="text" name="nama" id="nama" />
+    <>
+      <div className="font-sans bg-gray-100 w-full flex flex-col gap-2">
+        <div className="flex w-full items-center justify-center pt-2">
+            <div className="flex flex-col justify-center gap-2 w-5/12 bg-white border border-gray-300 rounded-2xl overflow-hidden">
+                <div className="bg-blue-600 h-[20px] w-full"></div>
+                <h1 className="px-10 py-2 text-3xl font-bold">Form Survey Perokok</h1>
+                <p className="px-10 pb-1 text-black-400">Isi form dibawah ini dengan jawaban yang sebenarnya.</p>
+                <div className="text-sm flex justify-between px-10 py-2 border-y border-gray-300">
+                    <p><span className="text-sm font-bold text-gray-800">example@gmail.com</span> <span className="text-blue-600">Switch Account</span></p>
+                    <p className="text-gray-400">cloud</p>
+                </div>
+                <p className="text-red-600 px-10 py-0 pb-2">* Indicates required question</p>
+            </div>
         </div>
-        <div>
-          <label htmlFor="umur">Berapa umur anda?</label><br />
-          <input type="number" name="umur" id="umur" />
+        <div className="w-full flex justify-center items-center">
+          <form action="submit" className="w-5/12 flex flex-col gap-2">
+            <div className="flex flex-col justify-center gap-2 bg-white border border-gray-300 rounded-2xl p-10">
+              <label htmlFor="nama">Siapa nama anda? <span className="text-red-600">*</span></label>
+              <input type="text" name="nama" id="nama" placeholder="Your answer" class="border-b border-gray-400 w-1/2 text-sm" />
+            </div>
+            <div className="flex flex-col justify-center gap-2 bg-white border border-gray-300 rounded-2xl p-10">
+              <label htmlFor="umur">Berapa umur anda? <span className="text-red-600">*</span></label>
+              <div>
+                <input type="number" name="umur" id="umur" placeholder="Your answer" class="border-b border-gray-400 w-1/2 text-sm" />
+              </div>
+            </div>
+            <div className="flex flex-col justify-center gap-2 bg-white border border-gray-300 rounded-2xl p-10">
+              <label htmlFor="m">Apa jenis kelamin anda? <span className="text-red-600">*</span></label>
+              <div className="flex gap-2">
+                <input type="radio" name="gender" id="m" value="m" />
+                <label htmlFor="m">Laki-laki</label>
+              </div>
+              <div className="flex gap-2">
+                <input type="radio" name="gender" id="f" value="f" />
+                <label htmlFor="f">Perempuan</label>
+              </div>
+            </div>
+            <div className="flex flex-col justify-center gap-2 bg-white border border-gray-300 rounded-2xl p-10">
+              <label htmlFor="y">Apakah anda perokok? <span className="text-red-600">*</span></label>
+              <div className="flex gap-2">
+                <input type="radio" name="smoke" id="y" value="y" />
+                <label htmlFor="y">Ya</label>
+              </div>
+              <div className="flex gap-2">
+                <input type="radio" name="smoke" id="n" value="n" />
+                <label htmlFor="n">Tidak</label>
+              </div>
+            </div>
+            <div className="flex flex-col justify-center gap-2 bg-white border border-gray-300 rounded-2xl p-10">
+              <label htmlFor="gg">Jika anda perokok, rokok apa yang pernah anda coba?</label>
+              <div className="flex flex-col items-start">
+                <div className="flex gap-2">
+                  <input type="checkbox" name="cigs" id="gg" value="gg" /><label htmlFor="gg">Gudang Garam Filter</label>
+                </div>
+                <div className="flex gap-2">
+                  <input type="checkbox" name="cigs" id="ls" value="ls" /><label htmlFor="ls">Lucky Strike</label>
+                </div>
+                <div className="flex gap-2">
+                  <input type="checkbox" name="cigs"  id="mb" value="mb" /><label htmlFor="mb">Marlboro</label>
+                </div>
+                <div className="flex gap-2">
+                  <input type="checkbox" name="cigs" id="es" value="es" /><label htmlFor="es">Esse</label>
+                </div>
+              </div>
+            </div>
+            <div className="flex justify-between">
+              <button type="submit" className="border bg-blue-600 py-2 px-4 rounded-lg text-white text-sm">Submit</button>
+              <button type="reset" className="text-blue-600 text-sm py-2 px-4">Clear form</button>
+            </div>
+          </form>
         </div>
-        <div>
-          <label htmlFor="m">Apa jenis kelamin anda?</label><br />
-          <input type="radio" name="gender" id="m" value="m" /><label htmlFor="m">Laki-laki</label>
-          <input type="radio" name="gender" id="f" value="f" /><label htmlFor="f">Perempuan</label>
-        </div>
-        <div>
-          <label htmlFor="y">Apakah anda perokok?</label><br />
-          <input type="radio" name="smoke" id="y" value="y" /><label htmlFor="y">Ya</label>
-          <input type="radio" name="smoke" id="n" value="n" /><label htmlFor="n">Tidak</label>
-        </div>
-        <div>
-          <label htmlFor="gg">Jika anda perokok, rokok apa yang pernah anda coba?</label><br />
-          <input type="checkbox" name="cigs" id="gg" value="gg" /><label htmlFor="gg">Gudang Garam Filter</label><br />
-          <input type="checkbox" name="cigs" id="ls" value="ls" /><label htmlFor="ls">Lucky Strike</label><br />
-          <input type="checkbox" name="cigs" id="mb" value="mb" /><label htmlFor="mb">Marlboro</label><br />
-          <input type="checkbox" name="cigs" id="es" value="es" /><label htmlFor="es">Esse</label><br />
-        </div>
-        <div>
-          <button type="submit">Submit</button>
-          <button type="reset">Clear form</button>
-        </div>
-      </form>
-    </div>
+      </div>
+    </>
   )
 }
 
